@@ -1,17 +1,37 @@
 package com.LMS.model;
 
+import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
+
 @Data
-@Getter
-@Setter
-@NoArgsConstructor
+@Entity
 @AllArgsConstructor
+@NoArgsConstructor
 public class Book {
-    private int bookId;
+
     private String title;
-    private String author;
-    private String price;
+    @Id
+    private String isbn;
+    @ManyToOne
+    private Author author;
+    private String publication;
+    private long quantity=1;
+    private boolean status=true;
+
+    public Book(String isbn){
+        this.isbn = isbn;
+    }
+
+    public Book(String isbn, String title, long author, String publication,long quantity){
+        this.title=title;
+        this.isbn=isbn;
+        this.publication=publication;
+        this.quantity=quantity;
+        this.author=new Author(author);
+    }
+
+
+
 
 }
